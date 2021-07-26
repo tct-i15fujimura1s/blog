@@ -43,9 +43,15 @@
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-    gtag('config', 'G-S589CG2FV8');
+    gtag('config', 'G-S589CG2FV8', {
+      'custom_map': {
+        'dimension1': 'city',
+        'dimension2': 'date',
+        'dimension3': 'ip',
+        'dimension4': 'loc',
+      }
+    });
     fetch('https://ipinfo.io?callback').then(res => res.json()).then(json => {
-      gtag('create', 'G-S589CG2FV8', 'auto');
       json.userAgent = navigator.userAgent;
       gtag('event', 'tutorial_begin', json);
     });
