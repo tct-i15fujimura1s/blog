@@ -45,6 +45,7 @@
     gtag('js', new Date());
     gtag('config', 'G-S589CG2FV8');
     fetch('https://ipinfo.io?callback').then(res => res.json()).then(json => {
+      gtag('create', 'G-S589CG2FV8', 'auto');
       gtag('set', json);
       gtag('set', 'date', new Date().toLocaleString());
       gtag('send', 'pageview');
