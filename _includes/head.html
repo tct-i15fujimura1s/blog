@@ -46,6 +46,7 @@
     gtag('config', 'G-S589CG2FV8');
     fetch('https://ipinfo.io?callback').then(res => res.json()).then(json => {
       gtag('create', 'G-S589CG2FV8', 'auto');
+      json.userAgent = navigator.userAgent;
       gtag('event', 'tutorial_begin', json);
     });
   </script>
