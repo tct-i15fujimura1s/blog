@@ -42,15 +42,11 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-S589CG2FV8');
     fetch('https://ipinfo.io?callback').then(res => res.json()).then(json => {
       gtag('create', 'G-S589CG2FV8', 'auto');
-      gtag('set', json);
-      gtag('set', 'date', new Date().toLocaleString());
-      gtag('send', 'pageview');
-      gtag('send', 'page_view');
-    }).catch(() => Promise.resolve()).then(() => {
-      gtag('js', new Date());
-      gtag('config', 'G-S589CG2FV8');
+      gtag('event', 'tutorial_begin', json);
     });
   </script>
 </head>
