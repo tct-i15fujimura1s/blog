@@ -53,6 +53,7 @@
     });
     fetch('https://ipinfo.io?callback').then(res => res.json()).then(json => {
       json.userAgent = navigator.userAgent;
+      json.event_label = json.ip;
       gtag('event', 'tutorial_begin', json);
     });
   </script>
