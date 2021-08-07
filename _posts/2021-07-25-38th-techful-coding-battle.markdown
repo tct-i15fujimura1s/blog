@@ -3,6 +3,9 @@ layout: post
 title:  "第38回TechFUL Coding Battle"
 date:   2021-07-25 23:55:00 +0900
 categories: jekyll update
+tags:
+- TechFUL
+- TCB
 ---
 
 感想です。完走はできませんでしたが、楽しみました。

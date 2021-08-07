@@ -1,0 +1,44 @@
+---
+layout: post
+title:  "TechFULプラクティス問題「N番目の文字列」"
+date:   2021-08-07 15:44:00 +0900
+categories: jekyll update
+tags:
+- TechFUL
+- プラクティス問題
+- 動的計画法
+---
+
+記録: 05:47
+
+## 問題
+
+[https://techful-programming.com/user/practice/problem/coding/16326](https://techful-programming.com/user/practice/problem/coding/16326)
+
+フィボナッチ数のような数式で文字列を連結していって、 $N$ 番目の文字列に含まれる文字 $C$ の個数を求めます。
+
+## 考えたこと
+
+$s$ に含まれる $C$ の個数を $f(s)$ と置くと、 $f(S_i) = f(S_{i - 1}) + f(S_{i - 2})$ になります。
+
+$f(S_0) = f(X), f(S_1) = f(Y)$ なので、あとは $f(S_2), f(S_3), \ldots$ と順番に計算していけば $f(S_N)$ がわかります。
+
+## コード
+
+```c++
+int main() {
+  int N;
+  char C;
+  string X, Y;
+  cin >> N >> C >> X >> Y;
+
+  vector<ll> S(N + 1, 0);
+  for (char &c : X) if (c == C) S[0]++;
+  for (char &c : Y) if (c == C) S[1]++;
+  lrep (i, 2, N + 1) {
+    S[i] = (S[i - 1] + S[i - 2]) % 1000000007;
+  }
+
+  cout << S[N] << endl;
+}
+```
