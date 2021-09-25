@@ -20,7 +20,7 @@ permalink: /tags
         {% for post in site.tags[tag] %}
         <dt class="text-large">
           <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%b %-d, %Y" }}</time>
-          <a href="{{ post.url | prepend: '/blog' | prepend: site.url }}">{{ post.title }}</a>
+          <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         </dt>
         <dd>{{ post.excerpt }}</dd>
         {% endfor %}
