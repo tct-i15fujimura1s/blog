@@ -12,19 +12,67 @@ permalink: /tags
 
 {% assign tag_names = tag_names | sort %}
 
-<section class="posts-by-tag row">
+<section id="tag-cloud"></section>
+
+<section class="posts-by-tag row" id="posts-by-tag">
   {% for tag in tag_names %}
-    <article class="col-12 col-lg-6 col-xl-4" id="{{ tag | slugize }}">
+    <article class="tagged-articles col-12 col-lg-6" id="{{ tag | slugize }}" data-tag="{{ tag }}">
       <h2>{{ tag }}</h2>
-      <dl>
-        {% for post in site.tags[tag] %}
-        <dt class="text-large">
-          <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%b %-d, %Y" }}</time>
-          <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </dt>
-        <dd>{{ post.excerpt }}</dd>
-        {% endfor %}
-      </dl>
+      {% for post in site.tags[tag] %}
+      <div class="tagged-article card m-1" style="width: 100%">
+        <div class="card-body">
+          <h5 class="card-title"><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%b %-d, %Y" }}</time></h6>
+          {{ post.excerpt }}
+        </div>
+      </div>
+      {% endfor %}
     </article>
   {% endfor %}
 </section>
+
+<script>
+!function() {
+  const tagCloud = document.getElementById('tag-cloud');
+
+  const tags = new Map;
+  for (const taggedArticles of document.querySelectorAll('#posts-by-tag .tagged-articles')) {
+    const id = taggedArticles.id;
+    const tag = taggedArticles.dataset.tag;
+    const numArticles = taggedArticles.getElementsByClassName('tagged-article').length;
+    tags.set(id, {tag, id, numArticles, taggedArticles});
+  }
+
+  const sortedTags = [...tags.values()];
+  sortedTags.sort((x, y) => y.numArticles - x.numArticles);
+  const maxNum = sortedTags.reduce((max, x) => Math.max(max, x.numArticles), 0);
+
+  for (const {tag, id, numArticles} of sortedTags) {
+    const link = document.createElement('a');
+    link.className = 'btn btn-light';
+    link.textContent = tag;
+    link.href = `#${id}`;
+    link.style.fontSize = `${2 * Math.sqrt(numArticles / maxNum)}rem`;
+    tagCloud.appendChild(link);
+  }
+
+  let highlighted = null, f;
+  addEventListener('popstate', f = e => {
+    if (highlighted) {
+      highlighted.style.backgroundColor = 'initial';
+      highlighted = null;
+    }
+
+    if (location.hash.length >= 2) {
+      const tag = tags.get(decodeURI(location.hash.slice(1)));
+      if (tag) {
+        const h2 = tag.taggedArticles.querySelector('h2');
+        console.log("highlight", h2);
+        h2.style.backgroundColor = '#ff0';
+        highlighted = h2;
+      }
+    }
+  });
+  f();
+}();
+</script>
