@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "第41回TechFUL Coding Battle「クエリ形式」"
-date:   2021-08-18 08:06:00 +0900
+date:   2021-10-25 08:53:00 +0900
 categories: jekyll update
 tags:
 - TechFUL
