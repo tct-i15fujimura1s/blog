@@ -10,13 +10,11 @@ tags:
 - 動的計画法
 ---
 
+フィボナッチ数のような数式で文字列を連結していって、 $N$ 番目の文字列に含まれる文字 $C$ の個数を求めます。
+
 記録: 05:47
 
-## 問題
-
 [https://techful-programming.com/user/practice/problem/coding/16326](https://techful-programming.com/user/practice/problem/coding/16326)
-
-フィボナッチ数のような数式で文字列を連結していって、 $N$ 番目の文字列に含まれる文字 $C$ の個数を求めます。
 
 ## 考えたこと
 
