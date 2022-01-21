@@ -59,9 +59,9 @@ harshad数の判定は高速にできるはずなので、iをLからRまで回�
 赤い玉がA個、青い玉がB個あるうちからK個の玉を取り出したとき、赤い玉の個数の期待値を求める問題です。
 $0 \le i \le \min(A, K)$のそれぞれについて、（$i\times$赤い玉が$i$個含まれる確率）の総和を求めると期待値が計算できます。赤い玉が$i$個含まれる確率は、$A$個から$i$個選び、$B$個から$K-i$個選んだ場合の数を$A+B$個から$K$個選んだ場合の数で割れば出ます。
 
-$$
+```math
 \sum_{i=0}^{\min(A,K)} i \times \frac{{_A}C{_i}\times{_B}C{_{K-i}}}{{_{A+B}C{_K}}}
-$$
+```
 
 所要時間は34分53秒でした。
 
@@ -150,22 +150,22 @@ $$
 
 数式で表すと
 
-$$
+```math
 \sum_{\substack{1 \le i < j \le N \\ S_i = S_j}} (N - j + i)
-$$
+```
 
 となります。最初の条件が面倒なので、文字が$c$であるインデックスを$I_c$としてまとめておきます。たとえばS=`shinshun`なら、$I_s=[1,5],I_h=[2,6],I_i=[3],I_n=[4,8],I_u=[7]$といった具合です。$I_{c,i}$を$I_c$の$i$番目の要素、つまり文字$c$が$i$番目に現れたときのインデックスとします。
 
 どんどん変形していきます。
 
-$$
+```math
 \begin{aligned}
 &\sum_{c = \mathrm{a}}^{\mathrm{z}} \sum_{1 \le i < j \le |I_c|} (N - I_{c,j} + I_{c,i}) \\
 =&\sum_{c = \mathrm{a}}^{\mathrm{z}} \left( \binom{|I_c|}{2} N - \sum_{1 \le i < j \le |I_c|} (I_{c,j} - I_{c,i}) \right) \\
 =&\sum_{c = \mathrm{a}}^{\mathrm{z}} \left( \binom{|I_c|}{2} N - \sum_{1 \le i < |I_c|} \sum_{i < j \le |I_c|} (I_{c,j} - I_{c,i}) \right) \\
 =&\sum_{c = \mathrm{a}}^{\mathrm{z}} \left( \binom{|I_c|}{2} N - \sum_{1 \le i < |I_c|} \left(\underset{\circledcirc}{\underline{\sum_{i < j \le |I_c|} I_{c,j}}} - (|I_c| - i) I_{c,i}\right) \right) 
 \end{aligned}
-$$
+```
 
 ここまでくると、下線◎の部分は累積和で計算でき、また、他の部分もO(N)なので間に合います。このような変数が複数出る式では、式をできるだけ分解して、変数がひとつの式の組み合わせで計算できるようにすることが肝心です。
 
